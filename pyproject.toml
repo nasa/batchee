@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "concat-batching-service"
+version = "0.1.0"
+description = "Determine how to group together input files into batches for subsequent concatenation"
+authors = ["Daniel Kaufman <daniel.kaufman@nasa.gov>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
