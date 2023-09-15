@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "concat-batching-service"
+name = "concat-batcher"
 version = "0.1.0"
 description = "Determine how to group together input files into batches for subsequent concatenation"
 authors = ["Daniel Kaufman <daniel.kaufman@nasa.gov>"]
@@ -9,6 +9,33 @@ readme = "README.md"
 python = "^3.10"
 
 
+[tool.poetry.extras]
+harmony = ["harmony-service-lib", "pystac"]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+builtins = ["ellipsis"]
+exclude = [
+  ".eggs",
+  "doc",
+  "_typed_ops.pyi",
+]
+target-version = "py39"
+# E402: module level import not at top of file
+# E501: line too long - let black worry about that
+# E731: do not assign a lambda expression, use a def
+ignore = [
+  "E402",
+  "E501",
+  "E731",
+]
+select = [
+  "F", # Pyflakes
+  "E", # Pycodestyle
+  "W",
+  "I", # isort
+  "UP", # Pyupgrade
+]
