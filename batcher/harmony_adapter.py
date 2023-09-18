@@ -1,5 +1,3 @@
-from typing import Optional
-
 from harmony.adapter import BaseHarmonyAdapter
 from pystac import Catalog, Item
 from pystac.item import Asset
@@ -21,7 +19,7 @@ def _is_netcdf_asset(asset: Asset) -> bool:
     )
 
 
-def _get_item_url(item: Item) -> Optional[str]:
+def _get_item_url(item: Item) -> str | None:
     """Check the `pystac.Item` for the first asset with the `data` role and a
     valid input format. If there are no matching assets, return None
 
@@ -81,11 +79,9 @@ class ConcatBatching(BaseHarmonyAdapter):
             # Message-only support is being depreciated in Harmony, so we should expect to
             # only see requests with catalogs when invoked with a newer Harmony instance
             # https://github.com/nasa/harmony-service-lib-py/blob/21bcfbda17caf626fb14d2ac4f8673be9726b549/harmony/adapter.py#L71
-            raise RuntimeError(
-                "Invoking Batcher without a STAC catalog is not supported"
-            )
+            raise RuntimeError("Invoking Batcher without a STAC catalog is not supported")
 
-        return self.message, self.process_catalog(self.catalog)
+        return self.message, self.process_items_many_to_one()
 
     def process_items_many_to_one(self):
         """Converts a list of STAC catalogs into a list of lists of STAC catalogs."""
@@ -94,16 +90,12 @@ class ConcatBatching(BaseHarmonyAdapter):
             netcdf_urls: list[str] = _get_netcdf_urls(items)
 
             batch_indices: list[int] = get_unique_day_scan_categories(netcdf_urls)
-            unique_category_indices: list[int] = sorted(
-                set(batch_indices), key=batch_indices.index
-            )
+            unique_category_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
 
             grouped: dict[int, list[Catalog]] = {}
             for k, v in zip(batch_indices, items):
                 grouped.setdefault(k, []).append(v)
-            catalogs: list[list[Catalog]] = [
-                grouped[k] for k in unique_category_indices
-            ]
+            catalogs: list[list[Catalog]] = [grouped[k] for k in unique_category_indices]
 
             return catalogs
 
