@@ -7,9 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-
-[tool.poetry.extras]
-harmony = ["harmony-service-lib", "pystac"]
+harmony-service-lib = "^1.0.23"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
