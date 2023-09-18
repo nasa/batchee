@@ -8,12 +8,12 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 
-
 [tool.poetry.extras]
 harmony = ["harmony-service-lib", "pystac"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
+black = "^23.9.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -29,7 +29,7 @@ exclude = [
   "doc",
   "_typed_ops.pyi",
 ]
-target-version = "py39"
+target-version = "py310"
 # E402: module level import not at top of file
 # E501: line too long - let black worry about that
 # E731: do not assign a lambda expression, use a def
