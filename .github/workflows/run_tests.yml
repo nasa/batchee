@@ -34,9 +34,10 @@ jobs:
         run: |
           poetry run ruff batcher
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: |
-          poetry run pytest tests/test_filename_grouping.py >& test_results.txt
+          poetry run coverage run -m pytest >& test_results.txt
+        # poetry run pytest tests/test_filename_grouping.py >& test_results.txt
         # TODO: expand tests to include full concatenation runs, i.e., don't just run test_group_handling.py
 
       - name: Generate coverage report
