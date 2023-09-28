@@ -42,8 +42,8 @@ jobs:
       - name: Generate coverage report
         if: ${{ always() }}
         run: |
-          coverage report -m >& coverage_report.txt
-          coverage html --dir htmlcov
+          poetry run coverage report -m >& coverage_report.txt
+          poetry run coverage html --dir htmlcov
 
       - name: Archive test results
         if: ${{ always() }}
