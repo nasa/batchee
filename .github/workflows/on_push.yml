@@ -10,13 +10,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-linux:
-    name: Lint and Test
-    runs-on: ubuntu-latest
+  run_tests:
+    uses: ./.github/workflows/run_tests.yml
+
+  bump_version:
+    needs: run_tests
+    runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v4
+    - name: Retrieve repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
@@ -76,18 +82,6 @@ jobs:
         poetry version ${CURRENT_VERSION%%rc*}
         echo "software_version=$(poetry version | awk '{print $2}')" >> $GITHUB_ENV
         echo "venue=ops" >> $GITHUB_ENV
-
-    - name: Install concat_batcher
-      run: poetry install
-
-    - name: Lint
-      run: |
-        poetry run ruff batcher
-
-    - name: Test with pytest
-      run: |
-        poetry run pytest tests/test_filename_grouping.py
-      # TODO: expand tests to include full concatenation runs, i.e., don't just run test_group_handling.py
 
 #    - name: Commit Version Bump
 #      # If building develop, a release branch, or main then we commit the version bump back to the repo
