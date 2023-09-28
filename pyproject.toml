@@ -13,7 +13,8 @@ harmony-service-lib = "^1.0.23"
 pytest = "^7.4.2"
 black = "^23.9.1"
 mypy = "^1.5.1"
-ruff = "^0.0.290"
+ruff = "^0.0.291"
+coverage = "^7.3.1"
 
 [build-system]
 requires = ["poetry-core"]
