@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- [issue/13](https://github.com/danielfromearth/batchee/issues/13): Add simple command line interface for testing
 ### Changed
+- [issue/11](https://github.com/danielfromearth/batchee/issues/11): Rename from concat_batcher to batchee
 ### Deprecated
 ### Removed
 ### Fixed

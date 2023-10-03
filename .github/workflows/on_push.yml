@@ -90,8 +90,8 @@ jobs:
 #        github.ref == 'refs/heads/main'    ||
 #        startsWith(github.ref, 'refs/heads/release')
 #      run: |
-#        git config --global user.name 'concat_batcher bot'
-#        git config --global user.email 'concat_batcher@noreply.github.com'
+#        git config --global user.name 'batchee bot'
+#        git config --global user.email 'batchee@noreply.github.com'
 #        git commit -am "/version ${{ env.software_version }}"
 #        git push
 #
