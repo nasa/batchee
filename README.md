@@ -1,3 +1,3 @@
-# concat_batcher
+# batchee
 
 Group together filenames so that concatenation operations can be performed on batches.
