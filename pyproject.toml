@@ -4,6 +4,12 @@ version = "0.1.0"
 description = "Determine how to group together input files into batches for subsequent concatenation"
 authors = ["Daniel Kaufman <daniel.kaufman@nasa.gov>"]
 readme = "README.md"
+classifiers = [
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+packages = [
+    { include = "batcher" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -15,6 +21,10 @@ black = "^23.9.1"
 mypy = "^1.5.1"
 ruff = "^0.0.292"
 coverage = "^7.3.2"
+
+[tool.poetry.scripts]
+batchee_harmony = 'batcher.harmony_cli:main'
+batchee = 'batcher.tempo_filename_parser:main'
 
 [build-system]
 requires = ["poetry-core"]
