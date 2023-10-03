@@ -1,8 +1,11 @@
 """Holds the logic for grouping together data files based on their filenames."""
+import logging
 import re
+from argparse import ArgumentParser
+from pathlib import Path
 
 tempo_granule_filename_pattern = re.compile(
-    r"TEMPO_"
+    r"^.*TEMPO_"
     r"(?P<product_type>[1-9A-Z]+)"
     r"(?P<proxy>(?:-PROXY)*)_"
     r"(?P<processing_level>L[0-9])_"
@@ -39,3 +42,45 @@ def get_unique_day_scan_categories(filenames: list) -> list[int]:
 
     # Generate a new list with the integer representation for each entry in the original list
     return [category_mapper[day_scan] for day_scan in day_and_scans]
+
+
+def main():
+    """Main CLI entrypoint"""
+
+    parser = ArgumentParser(
+        prog="batchee", description="Simple CLI wrapper around the granule batcher module."
+    )
+    parser.add_argument(
+        "file_names",
+        nargs="+",
+        help="A space-separated list of filenames for which batches will be determined.",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        help="Enable verbose output to stdout; useful for debugging",
+        action="store_true",
+    )
+
+    args = parser.parse_args()
+
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+
+    input_filenames = [str(Path(f).resolve()) for f in args.file_names]
+
+    batch_indices = get_unique_day_scan_categories(input_filenames)
+    unique_category_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
+    logging.info(f"batch_indices = {batch_indices}")
+
+    # --- Construct a STAC object based on the batch indices ---
+    grouped: dict[int, list[str]] = {}
+    for k, v in zip(batch_indices, input_filenames):
+        grouped.setdefault(k, []).append(v)
+    grouped_names: list[list[str]] = [grouped[k] for k in unique_category_indices]
+
+    return grouped_names
+
+
+if __name__ == "__main__":
+    main()
