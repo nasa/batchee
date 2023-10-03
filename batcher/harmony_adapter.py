@@ -2,7 +2,7 @@ from harmony.adapter import BaseHarmonyAdapter
 from pystac import Catalog, Item
 from pystac.item import Asset
 
-from batcher.tempo_filename_parser import get_unique_day_scan_categories
+from batcher.tempo_filename_parser import get_batch_indices
 
 VALID_EXTENSIONS = (".nc4", ".nc")
 VALID_MEDIA_TYPES = ["application/x-netcdf", "application/x-netcdf4"]
@@ -86,16 +86,19 @@ class ConcatBatching(BaseHarmonyAdapter):
     def process_items_many_to_one(self):
         """Converts a list of STAC catalogs into a list of lists of STAC catalogs."""
         try:
+            # --- Get granule filepaths (urls) ---
             items: list[Catalog] = list(self.get_all_catalog_items(self.catalog))
             netcdf_urls: list[str] = _get_netcdf_urls(items)
 
-            batch_indices: list[int] = get_unique_day_scan_categories(netcdf_urls)
-            unique_category_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
+            # --- Map each granule to an index representing the batch to which it belongs ---
+            batch_indices: list[int] = get_batch_indices(netcdf_urls)
+            unique_batch_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
 
+            # --- Construct a STAC object based on the batch indices ---
             grouped: dict[int, list[Catalog]] = {}
             for k, v in zip(batch_indices, items):
                 grouped.setdefault(k, []).append(v)
-            catalogs: list[list[Catalog]] = [grouped[k] for k in unique_category_indices]
+            catalogs: list[list[Catalog]] = [grouped[k] for k in unique_batch_indices]
 
             return catalogs
 

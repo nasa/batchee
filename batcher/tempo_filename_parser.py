@@ -14,12 +14,12 @@ tempo_granule_filename_pattern = re.compile(
 )
 
 
-def get_unique_day_scan_categories(filenames: list) -> list[int]:
+def get_batch_indices(filenames: list) -> list[int]:
     """
     Returns
     -------
     list[int]
-        category integer for each filename in the original list, e.g. [0, 0, 0, 1, 1, 1, ...]
+        batch index for each filename in the original list, e.g. [0, 0, 0, 1, 1, 1, ...]
     """
     # Make a new list with days and scans, e.g. [('20130701', 'S009'), ('20130701', 'S009'), ...]
     day_and_scans: list[tuple[str, str]] = []
@@ -29,13 +29,13 @@ def get_unique_day_scan_categories(filenames: list) -> list[int]:
             match_dict = matches.groupdict()
             day_and_scans.append((match_dict["day_in_granule"], match_dict["daily_scan_id"]))
 
-    # Unique categories are determined, while keeping the same order
+    # Unique day-scans are determined (while keeping the same order). Each will be its own batch.
     unique_day_scans: list[tuple[str, str]] = sorted(set(day_and_scans), key=day_and_scans.index)
 
     # Map each day/scan to an integer
-    category_mapper: dict[tuple[str, str], int] = {
+    batch_mapper: dict[tuple[str, str], int] = {
         day_scan: idx for idx, day_scan in enumerate(unique_day_scans)
     }
 
     # Generate a new list with the integer representation for each entry in the original list
-    return [category_mapper[day_scan] for day_scan in day_and_scans]
+    return [batch_mapper[day_scan] for day_scan in day_and_scans]
