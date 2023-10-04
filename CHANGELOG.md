@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - [issue/13](https://github.com/danielfromearth/batchee/issues/13): Add simple command line interface for testing
+- [issue/16](https://github.com/danielfromearth/batchee/issues/16): Add a logo
 ### Changed
 - [issue/11](https://github.com/danielfromearth/batchee/issues/11): Rename from concat_batcher to batchee
 ### Deprecated
