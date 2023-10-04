@@ -1,13 +1,19 @@
-## Description
+GitHub Issue: #NUM _(replace NUM with GitHub issue number)_
+
+### Description
 
 A short description of the changes in this PR.
 
-## Jira Issue ID
+### Local test steps
 
-## Local Test Steps
+_Summarize testing and verification you've done. This includes unit tests or testing with specific data_
+
+### Overview of integration done
+
+_Explain how this change was integration tested. Provide screenshots or logs if appropriate. An example of this would be a local Harmony deployment._
 
 ## PR Acceptance Checklist
-* [ ] Jira ticket acceptance criteria met.
-* [ ] Tests added/updated and passing.
-* [ ] Documentation updated (if needed).
+* [ ] Unit tests added/updated and passing.
+* [ ] Integration testing
 * [ ] `CHANGELOG.md` updated
+* [ ] Documentation updated (if needed).
