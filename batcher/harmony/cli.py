@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 
 import harmony
 
-from .harmony_adapter import ConcatBatching as HarmonyAdapter
+from batcher.harmony.service_adapter import ConcatBatching as HarmonyAdapter
 
 
 def main(argv, **kwargs):

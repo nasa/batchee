@@ -44,7 +44,7 @@ def get_batch_indices(filenames: list) -> list[int]:
     return [batch_mapper[day_scan] for day_scan in day_and_scans]
 
 
-def main():
+def main() -> list[list[str]]:
     """Main CLI entrypoint"""
 
     parser = ArgumentParser(
