@@ -5,8 +5,8 @@ RUN apt-get update \
      && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
     gcc \
     libnetcdf-dev \
-    libhdf5-dev \
-    hdf5-helpers \
+    #libhdf5-dev \
+    #hdf5-helpers \
     && pip3 install --upgrade pip \
     && pip3 install cython \
     && apt-get clean
