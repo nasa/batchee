@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [issue/16](https://github.com/danielfromearth/batchee/issues/16): Add a logo
 ### Changed
 - [issue/11](https://github.com/danielfromearth/batchee/issues/11): Rename from concat_batcher to batchee
+- [issue/6](https://github.com/danielfromearth/batchee/issues/6): Improve CICD workflows
 ### Deprecated
 ### Removed
 ### Fixed
