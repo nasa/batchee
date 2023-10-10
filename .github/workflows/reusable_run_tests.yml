@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/reusable_python_and_poetry_setup.yaml
+      - uses: ./.github/workflows/reusable_python_and_poetry_setup.yaml
 
       - name: Install package
         run: poetry install
