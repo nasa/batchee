@@ -23,7 +23,7 @@ ruff = "^0.0.292"
 coverage = "^7.3.2"
 
 [tool.poetry.scripts]
-batchee_harmony = 'batcher.harmony_cli:main'
+batchee_harmony = 'batcher.harmony.cli:main'
 batchee = 'batcher.tempo_filename_parser:main'
 
 [build-system]
