@@ -1,0 +1,12 @@
+# When a pull request is opened, run linting and tests.
+name: Pull Request Received
+
+# read-only repo token
+# no access to secrets
+on:
+  pull_request:
+    branches: [ feature/**, issue/**, issues/** ]
+
+jobs:
+  build_and_test:
+    uses: ./.github/workflows/reusable_run_tests.yml
