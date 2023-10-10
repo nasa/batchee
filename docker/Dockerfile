@@ -40,6 +40,7 @@ USER dockeruser
 #RUN pip3 install --no-cache-dir --force --user --index-url https://pypi.org/simple/ --extra-index-url https://test.pypi.org/simple/ $SOURCE \
 #    && rm -rf $DIST_PATH
 
+#install poetry as root
 USER root
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev
