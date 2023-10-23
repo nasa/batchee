@@ -48,5 +48,6 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev
 
 USER dockeruser
+COPY --chown=dockeruser ./docker-entrypoint.sh docker-entrypoint.sh
 # Run the service
 ENTRYPOINT ["./docker-entrypoint.sh"]
