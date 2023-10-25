@@ -1,10 +1,11 @@
 # When a pull request is opened, run linting and tests.
-name: Pull Request Received
+name: Receive PR
 
 # read-only repo token
 # no access to secrets
 on:
   pull_request:
+    # Sequence of patterns matched against refs/heads
     branches: [ feature/**, issue/**, issues/** ]
 
 jobs:
