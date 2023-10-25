@@ -19,7 +19,7 @@ harmony-service-lib = "^1.0.23"
 pytest = "^7.4.2"
 black = "^23.10.1"
 mypy = "^1.6.1"
-ruff = "^0.1.1"
+ruff = "^0.1.2"
 coverage = "^7.3.2"
 
 [tool.poetry.scripts]
