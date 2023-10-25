@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests,
-# and report test results and code coverage as artifacts. It will
-# be called by the workflow that run tests against new PRs and as
-# a first step in the workflow that publishes new Docker images.
+#   and report test results and code coverage as artifacts. It will
+#   be called by the workflow that runs tests against new PRs and as
+#   a first step in the workflow that publishes new Docker images.
 
 name: A reusable workflow to build and run the unit test suite
 
@@ -12,14 +12,18 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.10' ]
 
+    name: Python ${{ matrix.python-version }} tests
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: ${{ matrix.python-version }}
 
       - name: Set up Poetry
         uses: abatilo/actions-poetry@v2.3.0
@@ -29,39 +33,24 @@ jobs:
       - name: Install package
         run: poetry install
 
-      - name: Run linting
+      - name: Lint
         run: |
           poetry run ruff batcher
 
       - name: Run tests with coverage
         run: |
-          poetry run coverage run -m pytest >& test_results.txt
-        # poetry run pytest tests/test_filename_grouping.py >& test_results.txt
-        # TODO: expand tests to include full concatenation runs, i.e., don't just run test_group_handling.py
+          poetry run pytest --cov=batcher --cov-report=xml:build/reports/coverage.xml --cov-report=html:build/reports/coverage.html tests/
 
-      - name: Generate coverage report
-        if: ${{ always() }}
-        run: |
-          poetry run coverage report -m >& coverage_report.txt
-          poetry run coverage html --dir htmlcov
-
-      - name: Archive test results
+      - name: Archive code coverage report (xml)
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
         with:
-          name: test result
-          path: test_results.txt
-
-      - name: Archive code coverage report (plain text)
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: code coverage report (plain text)
-          path: coverage_report.txt
+          name: code coverage report (xml)
+          path: build/reports/coverage.xml
 
       - name: Archive code coverage report (HTML)
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
         with:
           name: code coverage report (HTML)
-          path: htmlcov/*
+          path: build/reports/coverage.html
