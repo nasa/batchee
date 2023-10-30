@@ -11,7 +11,7 @@ RUN apt-get update \
     && pip3 install cython \
     && pip3 install poetry \
     && apt-get clean
-   
+
 
 # Create a new user
 RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/dockeruser --gecos "" --uid 1000 dockeruser
@@ -29,8 +29,8 @@ ARG DIST_PATH
 
 USER root
 RUN mkdir -p /worker && chown dockeruser /worker
-COPY pyproject.toml /worker 
-# COPY ../pyproject.toml /worker 
+COPY pyproject.toml /worker
+# COPY ../pyproject.toml /worker
 USER dockeruser
 
 WORKDIR /worker
@@ -48,5 +48,6 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev
 
 USER dockeruser
-# Run the Batchee Harmony service
-ENTRYPOINT ["batchee_harmony"]
+COPY --chown=dockeruser ./docker-entrypoint.sh docker-entrypoint.sh
+# Run the service
+ENTRYPOINT ["./docker-entrypoint.sh"]
