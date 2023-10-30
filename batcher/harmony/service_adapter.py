@@ -97,7 +97,7 @@ class ConcatBatching(BaseHarmonyAdapter):
 
                 for idx, item in enumerate(batch_items):
                     output_item.add_asset(
-                        "data",
+                        f"data_{idx}",
                         Asset(
                             batch_urls[idx],
                             title=batch_urls[idx],
