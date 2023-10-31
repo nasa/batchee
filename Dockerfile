@@ -31,19 +31,14 @@ USER root
 RUN mkdir -p /worker && chown dockeruser /worker
 COPY pyproject.toml /worker
 # COPY ../pyproject.toml /worker
-USER dockeruser
 
 WORKDIR /worker
-
 # ENV PYTHONPATH=${PYTHONPATH}:${PWD}
-
 COPY --chown=dockeruser $DIST_PATH $DIST_PATH
-USER dockeruser
 #RUN pip3 install --no-cache-dir --force --user --index-url https://pypi.org/simple/ --extra-index-url https://test.pypi.org/simple/ $SOURCE \
 #    && rm -rf $DIST_PATH
 
 #install poetry as root
-USER root
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main
 
