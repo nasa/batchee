@@ -1,3 +1,4 @@
+# When a pull request is opened, run linting and tests.
 name: Receive PR
 
 # read-only repo token
@@ -5,11 +6,8 @@ name: Receive PR
 on:
   pull_request:
     # Sequence of patterns matched against refs/heads
-    branches:
-      - feature/**
-      - issue/**
-      - issues/**
+    branches: [ feature/**, issue/**, issues/** ]
 
 jobs:
   build_and_test:
-    uses: ./.github/workflows/run_tests.yml
+    uses: ./.github/workflows/reusable_run_tests.yml

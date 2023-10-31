@@ -1,4 +1,4 @@
-from batcher.tempo_filename_parser import get_unique_day_scan_categories
+from batcher.tempo_filename_parser import get_batch_indices
 
 example_filenames = [
     "TEMPO_HCHO_L2_V01_20130701T212354Z_S009G05.nc",
@@ -11,6 +11,6 @@ example_filenames = [
 
 
 def test_grouping():
-    results = get_unique_day_scan_categories(example_filenames)
+    results = get_batch_indices(example_filenames)
 
     assert results == [0, 0, 0, 1, 1, 1]
