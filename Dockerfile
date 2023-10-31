@@ -45,7 +45,7 @@ USER dockeruser
 #install poetry as root
 USER root
 RUN poetry config virtualenvs.create false
-RUN poetry install --no-dev
+RUN poetry install --only main
 
 USER dockeruser
 COPY --chown=dockeruser ./docker-entrypoint.sh docker-entrypoint.sh
