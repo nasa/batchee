@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- [issue/6](https://github.com/danielfromearth/batchee/issues/6): Create Adapter code that processes a Harmony Message and STAC Catalog
+- [issue/7](https://github.com/danielfromearth/batchee/issues/7): Create working Docker image
 - [issue/13](https://github.com/danielfromearth/batchee/issues/13): Add simple command line interface for testing
 - [issue/16](https://github.com/danielfromearth/batchee/issues/16): Add a logo
-- [issue/6](https://github.com/danielfromearth/batchee/issues/6): Create Adapter code that processes a Harmony Message and STAC Catalog
 ### Changed
 - [issue/11](https://github.com/danielfromearth/batchee/issues/11): Rename from concat_batcher to batchee
 - [issue/21](https://github.com/danielfromearth/batchee/issues/21): Improve CICD workflows
