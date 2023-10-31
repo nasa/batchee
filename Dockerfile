@@ -10,7 +10,7 @@ RUN apt-get update \
     && pip3 install --upgrade pip \
     && pip3 install cython \
     && pip3 install poetry \
-    && apt-get clean
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 # Create a new user
