@@ -9,8 +9,9 @@ RUN apt-get update \
     #hdf5-helpers \
     && pip3 install --upgrade pip \
     && pip3 install cython \
-    && apt-get clean \
-    && pip3 install poetry
+    && pip3 install poetry \
+    && apt-get clean
+
 
 # Create a new user
 RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/dockeruser --gecos "" --uid 1000 dockeruser
@@ -28,12 +29,13 @@ ARG DIST_PATH
 
 USER root
 RUN mkdir -p /worker && chown dockeruser /worker
-COPY ../pyproject.toml /worker 
+COPY pyproject.toml /worker
+# COPY ../pyproject.toml /worker
 USER dockeruser
 
 WORKDIR /worker
 
-ENV PYTHONPATH=${PYTHONPATH}:${PWD}
+# ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 
 COPY --chown=dockeruser $DIST_PATH $DIST_PATH
 USER dockeruser
@@ -46,5 +48,6 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev
 
 USER dockeruser
-# Run the Batchee Harmony service
-ENTRYPOINT ["batchee_harmony"]
+COPY --chown=dockeruser ./docker-entrypoint.sh docker-entrypoint.sh
+# Run the service
+ENTRYPOINT ["./docker-entrypoint.sh"]

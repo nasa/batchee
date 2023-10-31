@@ -50,6 +50,7 @@ class ConcatBatching(BaseHarmonyAdapter):
 
     def process_catalog(self, catalog: pystac.Catalog):
         """Converts a list of STAC catalogs into a list of lists of STAC catalogs."""
+        self.logger.info("process_catalog() started.")
         try:
             result = catalog.clone()
             result.id = str(uuid4())
@@ -58,16 +59,20 @@ class ConcatBatching(BaseHarmonyAdapter):
             # Get all the items from the catalog, including from child or linked catalogs
             items = list(self.get_all_catalog_items(catalog))
 
+            self.logger.info(f"length of items==={len(items)}.")
+
             # Quick return if catalog contains no items
             if len(items) == 0:
                 return result
 
             # # --- Get granule filepaths (urls) ---
             netcdf_urls: list[str] = _get_netcdf_urls(items)
+            self.logger.info(f"netcdf_urls==={netcdf_urls}.")
 
             # --- Map each granule to an index representing the batch to which it belongs ---
-            batch_indices: list[int] = get_batch_indices(netcdf_urls)
+            batch_indices: list[int] = get_batch_indices(netcdf_urls, self.logger)
             sorted(set(batch_indices), key=batch_indices.index)
+            self.logger.info(f"batch_indices==={batch_indices}.")
 
             # --- Construct a dictionary with a separate key for each batch ---
             grouped: dict[int, list[Item]] = {}
@@ -83,6 +88,8 @@ class ConcatBatching(BaseHarmonyAdapter):
                 bounding_box = _get_output_bounding_box(batch_items)
                 properties = _get_output_date_range(batch_items)
 
+                self.logger.info(f"constructing new pystac.Item for batch_id==={batch_id}.")
+
                 # Construct a new pystac.Item with every granule in the batch as a pystac.Asset
                 output_item = Item(
                     str(uuid4()), bbox_to_geometry(bounding_box), bounding_box, None, properties
@@ -90,7 +97,7 @@ class ConcatBatching(BaseHarmonyAdapter):
 
                 for idx, item in enumerate(batch_items):
                     output_item.add_asset(
-                        "data",
+                        f"data_{idx}",
                         Asset(
                             batch_urls[idx],
                             title=batch_urls[idx],
@@ -100,6 +107,8 @@ class ConcatBatching(BaseHarmonyAdapter):
                     )
 
                 result.add_item(output_item)
+
+            self.logger.info("STAC catalog creation complete.")
 
             return result
 
