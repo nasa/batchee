@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - [issue/11](https://github.com/danielfromearth/batchee/issues/11): Rename from concat_batcher to batchee
 - [issue/21](https://github.com/danielfromearth/batchee/issues/21): Improve CICD workflows
+- [issue/41](https://github.com/danielfromearth/batchee/issues/41): Change Adapter output from single to multiple STAC Catalogs
 ### Deprecated
 ### Removed
 ### Fixed
