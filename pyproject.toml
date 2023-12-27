@@ -13,7 +13,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-harmony-service-lib = "^1.0.24"
+harmony-service-lib = "^1.0.25"
 
 [tool.poetry.scripts]
 batchee_harmony = 'batcher.harmony.cli:main'
