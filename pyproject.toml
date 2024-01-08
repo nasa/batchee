@@ -21,7 +21,7 @@ batchee = 'batcher.tempo_filename_parser:main'
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.4.0"
-ruff = "^0.1.9"
+ruff = "^0.1.11"
 pytest = "^7.4.4"
 black = "^23.12.1"
 mypy = "^1.8.0"
