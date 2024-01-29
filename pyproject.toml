@@ -23,7 +23,7 @@ batchee = 'batcher.tempo_filename_parser:main'
 coverage = "^7.4.0"
 ruff = "^0.1.14"
 pytest = "^7.4.4"
-black = "^23.12.1"
+black = "^24.1.1"
 mypy = "^1.8.0"
 pytest-cov = "^4.1.0"
 
