@@ -20,7 +20,7 @@ batchee_harmony = 'batcher.harmony.cli:main'
 batchee = 'batcher.tempo_filename_parser:main'
 
 [tool.poetry.group.dev.dependencies]
-coverage = "^7.4.1"
+coverage = "^7.4.3"
 ruff = "^0.2.2"
 pytest = "^8.0.2"
 black = "^24.2.0"
