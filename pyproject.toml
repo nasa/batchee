@@ -13,18 +13,18 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-harmony-service-lib = "^1.0.24"
+harmony-service-lib = "^1.0.25"
 
 [tool.poetry.scripts]
 batchee_harmony = 'batcher.harmony.cli:main'
 batchee = 'batcher.tempo_filename_parser:main'
 
 [tool.poetry.group.dev.dependencies]
-coverage = "^7.3.2"
-ruff = "^0.1.6"
-pytest = "^7.4.3"
+coverage = "^7.4.4"
+ruff = "^0.3.3"
+pytest = "^8.1.1"
 black = "^24.3.0"
-mypy = "^1.7.0"
+mypy = "^1.9.0"
 pytest-cov = "^4.1.0"
 
 [build-system]

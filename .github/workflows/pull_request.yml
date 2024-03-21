@@ -10,4 +10,4 @@ on:
 
 jobs:
   build_and_test:
-    uses: ./.github/workflows/reusable_run_tests.yml
+    uses: ./.github/workflows/run_tests.yml
