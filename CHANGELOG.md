@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [issue/16](https://github.com/danielfromearth/batchee/issues/16): Add a logo
 - [PR #75](https://github.com/danielfromearth/batchee/pull/75): Add Docker build steps to GitHub Actions workflow
 - [PR #84](https://github.com/danielfromearth/batchee/pull/84): Add readme badges
+- [PR #100](https://github.com/danielfromearth/batchee/pull/100): Add license
 ### Changed
 - [issue/11](https://github.com/danielfromearth/batchee/issues/11): Rename from concat_batcher to batchee
 - [issue/21](https://github.com/danielfromearth/batchee/issues/21): Improve CICD workflows
