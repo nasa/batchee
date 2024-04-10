@@ -56,3 +56,6 @@ poetry run batchee [file_names ...]
 
 - `-h`, `--help`            show this help message and exit
 - `-v`, `--verbose`  Enable verbose output to stdout; useful for debugging
+
+---
+This package is NASA Software Release Authorization (SRA) # LAR-20440-1
