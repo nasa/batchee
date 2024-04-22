@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [PR #75](https://github.com/danielfromearth/batchee/pull/75): Add Docker build steps to GitHub Actions workflow
 - [PR #84](https://github.com/danielfromearth/batchee/pull/84): Add readme badges
 - [PR #100](https://github.com/danielfromearth/batchee/pull/100): Add license
+- [PR #111](https://github.com/nasa/batchee/pull/111): Add codecov to CI pipeline
 ### Changed
 - [issue/11](https://github.com/danielfromearth/batchee/issues/11): Rename from concat_batcher to batchee
 - [issue/21](https://github.com/danielfromearth/batchee/issues/21): Improve CICD workflows
