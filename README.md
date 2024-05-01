@@ -14,6 +14,15 @@
     <a href="http://mypy-lang.org/" target="_blank">
         <img src="http://www.mypy-lang.org/static/mypy_badge.svg" alt="Mypy checked">
     </a>
+    <a href="https://pypi.org/project/batchee/" target="_blank">
+        <img src="https://img.shields.io/pypi/pyversions/batchee.svg" alt="Python Versions">
+    </a>
+    <a href="https://pypi.org/project/batchee" target="_blank">
+        <img src="https://img.shields.io/pypi/v/batchee?color=%2334D058label=pypi%20package" alt="Package version">
+    </a>
+    <a href="https://codecov.io/gh/nasa/batchee">
+     <img src="https://codecov.io/gh/nasa/batchee/graph/badge.svg?token=WDj92iN7c4" alt="Code coverage">
+    </a>
 </p>
 
 [//]: # (Using deprecated `align="center"` for the logo image and badges above, because of https://stackoverflow.com/a/62383408)
