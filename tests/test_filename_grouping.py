@@ -1,3 +1,7 @@
+import sys
+from unittest.mock import patch
+
+import batcher.tempo_filename_parser
 from batcher.tempo_filename_parser import get_batch_indices
 
 example_filenames = [
@@ -14,3 +18,13 @@ def test_grouping():
     results = get_batch_indices(example_filenames)
 
     assert results == [0, 0, 0, 1, 1, 1]
+
+
+def test_main_cli():
+    test_args = [batcher.tempo_filename_parser.__file__, "-v"]
+    test_args.extend(example_filenames)
+
+    with patch.object(sys, "argv", test_args):
+        grouped_names = batcher.tempo_filename_parser.main()
+
+    assert grouped_names == [example_filenames[0:3], example_filenames[3:6]]
