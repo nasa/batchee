@@ -28,7 +28,6 @@
 import logging
 import re
 from argparse import ArgumentParser
-from pathlib import Path
 
 default_logger = logging.getLogger(__name__)
 
@@ -99,7 +98,7 @@ def main() -> list[list[str]]:
     if args.verbose:
         logging.basicConfig(level=logging.DEBUG)
 
-    input_filenames = [str(Path(f).resolve()) for f in args.file_names]
+    input_filenames = args.file_names
 
     batch_indices = get_batch_indices(input_filenames)
     unique_category_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
