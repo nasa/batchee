@@ -27,7 +27,7 @@
     },
     {
       "rel": "next",
-      "href": "data/harmony/source/catalog1.json",
+      "href": "tests/data/harmony/source/catalog1.json",
       "type": "application/json",
       "title": "Next page"
     }
