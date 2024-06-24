@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - [issue #127](https://github.com/nasa/batchee/issues/127): Group dependabot updates into fewer PRs
+- [issue #129](https://github.com/nasa/batchee/issues/129): Add autoupdate schedule for pre-commit
 ### Changed
 ### Deprecated
 ### Removed
