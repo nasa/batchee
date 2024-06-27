@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [unreleased]
+
+### Added
+- [issue #127](https://github.com/nasa/batchee/issues/127): Group dependabot updates into fewer PRs
+- [issue #129](https://github.com/nasa/batchee/issues/129): Add autoupdate schedule for pre-commit
+### Changed
+- [issue #128](https://github.com/nasa/batchee/issues/128): Increase continuous integration/unit test coverage
+### Deprecated
+### Removed
+### Fixed
+
 ## [1.1.0]
 
 ### Added

@@ -125,7 +125,7 @@ class ConcatBatching(BaseHarmonyAdapter):
                         _get_output_date_range([item]),
                     )
                     output_item.add_asset(
-                        f"data_{idx}",
+                        "data",
                         Asset(
                             _get_item_url(item),
                             title=_get_item_url(item),
