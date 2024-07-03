@@ -39,7 +39,7 @@ jobs:
 
       - name: Lint
         run: |
-          poetry run ruff batcher
+          poetry run ruff check batcher
 
       - name: Run tests with coverage
         run: |
