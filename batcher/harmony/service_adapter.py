@@ -27,8 +27,8 @@
 from uuid import uuid4
 
 import pystac
-from harmony.adapter import BaseHarmonyAdapter
-from harmony.util import bbox_to_geometry
+from harmony_service_lib.adapter import BaseHarmonyAdapter
+from harmony_service_lib.util import bbox_to_geometry
 from pystac import Item
 from pystac.item import Asset
 
