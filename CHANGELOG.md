@@ -36,9 +36,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Create Adapter code that processes a Harmony Message and STAC Catalog ([#6](https://github.com/nasa/batchee/issues/6))([**@danielfromearth**](https://github.com/danielfromearth))
-- Create working Docker image ([#7](https://github.com/nasa/batchee/issues/7))([**@danielfromearth**](https://github.com/danielfromearth))
+- Create working Docker image ([#7](https://github.com/nasa/batchee/issues/7))([**@danielfromearth**](https://github.com/danielfromearth),[**@hpatel426**](https://github.com/hpatel426))
 - Add simple command line interface for testing ([#13](https://github.com/nasa/batchee/issues/13))([**@danielfromearth**](https://github.com/danielfromearth))
-- Add a logo ([#16](https://github.com/nasa/batchee/issues/16))
+- Add a logo ([#16](https://github.com/nasa/batchee/issues/16))([**@danielfromearth**](https://github.com/danielfromearth))
 - Add Docker build steps to GitHub Actions workflow ([#75](https://github.com/nasa/batchee/pull/75))([**@danielfromearth**](https://github.com/danielfromearth))
 - Add readme badges ([#84](https://github.com/nasa/batchee/pull/84))([**@danielfromearth**](https://github.com/danielfromearth))
 - Add license ([#100](https://github.com/nasa/batchee/pull/100))([**@danielfromearth**](https://github.com/danielfromearth))
