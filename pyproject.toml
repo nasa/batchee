@@ -37,9 +37,6 @@ module = [
 ]
 ignore_missing_imports = true
 
-[tool.black]
-line-length = 100
-
 [tool.ruff]
 builtins = ["ellipsis"]
 exclude = [
@@ -47,6 +44,8 @@ exclude = [
   "doc",
   "_typed_ops.pyi",
 ]
+# Allow lines to be as long as 100.
+line-length = 100
 target-version = "py310"
 
 [tool.ruff.lint]
