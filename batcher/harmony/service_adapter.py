@@ -70,7 +70,9 @@ class ConcatBatching(BaseHarmonyAdapter):
             # Message-only support is being depreciated in Harmony, so we should expect to
             # only see requests with catalogs when invoked with a newer Harmony instance
             # https://github.com/nasa/harmony-service-lib-py/blob/21bcfbda17caf626fb14d2ac4f8673be9726b549/harmony/adapter.py#L71
-            raise RuntimeError("Invoking Batchee without a STAC catalog is not supported")
+            raise RuntimeError(
+                "Invoking Batchee without a STAC catalog is not supported"
+            )
 
         return self.message, self.process_catalog(self.catalog)
 
@@ -108,7 +110,9 @@ class ConcatBatching(BaseHarmonyAdapter):
             #   and each Catalog holds multiple Items (which represent each granule).
             catalogs = []
             for batch_id, batch_items in grouped.items():
-                self.logger.info(f"constructing new pystac.Catalog for batch_id==={batch_id}.")
+                self.logger.info(
+                    f"constructing new pystac.Catalog for batch_id==={batch_id}."
+                )
                 # Initialize a new, empty Catalog
                 batch_catalog = catalog.clone()
                 batch_catalog.id = str(uuid4())
@@ -135,7 +139,9 @@ class ConcatBatching(BaseHarmonyAdapter):
                     )
                     batch_catalog.add_item(output_item)
 
-                self.logger.info("STAC catalog creation for batch_id==={batch_id} complete.")
+                self.logger.info(
+                    "STAC catalog creation for batch_id==={batch_id} complete."
+                )
                 catalogs.append(batch_catalog)
 
             self.logger.info("All STAC catalogs are complete.")

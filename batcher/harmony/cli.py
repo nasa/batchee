@@ -25,6 +25,7 @@
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
 """A Harmony CLI wrapper around the concatenate-batcher"""
+
 from argparse import ArgumentParser
 
 import harmony_service_lib
@@ -45,7 +46,8 @@ def main(config: harmony_service_lib.util.Config = None) -> None:
     None
     """
     parser = ArgumentParser(
-        prog="Pre-concatenate-batching", description="Run the pre-concatenate-batching service"
+        prog="Pre-concatenate-batching",
+        description="Run the pre-concatenate-batching service",
     )
     harmony_service_lib.setup_cli(parser)
     args = parser.parse_args()

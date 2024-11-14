@@ -22,7 +22,6 @@ class TestBatching:
 
         # test with both paged catalogs and un-paged catalogs
         for in_catalog_name in ["catalog.json", "catalog0.json"]:
-
             in_catalog_path = self.__harmony_path.joinpath("source", in_catalog_name)
 
             test_args = [
@@ -64,7 +63,9 @@ class TestBatching:
 
                 for item_meta in out_catalog["links"]:
                     if item_meta["rel"] == "item":
-                        item_path = temp_output_dir.joinpath(item_meta["href"]).resolve()
+                        item_path = temp_output_dir.joinpath(
+                            item_meta["href"]
+                        ).resolve()
 
                         # -- Item Verification --
                         item = json.loads(item_path.read_text())
@@ -80,7 +81,9 @@ class TestBatching:
                         assert data["type"] == "application/x-netcdf4"
                         assert data["roles"] == ["data"]
 
-                        batched_files[batch_index].append(Path(urlsplit(data["href"]).path).stem)
+                        batched_files[batch_index].append(
+                            Path(urlsplit(data["href"]).path).stem
+                        )
 
             # -- batch file list verification --
             files_dict = {
