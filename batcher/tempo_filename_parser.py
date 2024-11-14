@@ -45,9 +45,7 @@ tempo_granule_filename_pattern = re.compile(
 )
 
 
-def get_batch_indices(
-    filenames: list, logger: logging.Logger = default_logger
-) -> list[int]:
+def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) -> list[int]:
     """
     Returns
     -------
@@ -62,14 +60,10 @@ def get_batch_indices(
         matches = tempo_granule_filename_pattern.match(name)
         if matches:
             match_dict = matches.groupdict()
-            day_and_scans.append(
-                (match_dict["day_in_granule"], match_dict["daily_scan_id"])
-            )
+            day_and_scans.append((match_dict["day_in_granule"], match_dict["daily_scan_id"]))
 
     # Unique day-scans are determined (while keeping the same order). Each will be its own batch.
-    unique_day_scans: list[tuple[str, str]] = sorted(
-        set(day_and_scans), key=day_and_scans.index
-    )
+    unique_day_scans: list[tuple[str, str]] = sorted(set(day_and_scans), key=day_and_scans.index)
 
     logger.info(f"unique_day_scans==={unique_day_scans}.")
 
@@ -109,9 +103,7 @@ def main() -> list[list[str]]:
     input_filenames = args.file_names
 
     batch_indices = get_batch_indices(input_filenames)
-    unique_category_indices: list[int] = sorted(
-        set(batch_indices), key=batch_indices.index
-    )
+    unique_category_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
     logging.info(f"batch_indices = {batch_indices}")
 
     # --- Construct a STAC object based on the batch indices ---
