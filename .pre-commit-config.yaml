@@ -6,40 +6,49 @@ ci:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
-    hooks:
-      - id: trailing-whitespace
-        exclude: tests(/\w*)*/functional/t/trailing_whitespaces.py|tests/pyreverse/data/.*.html|doc/data/messages/t/trailing-whitespace/bad.py
-      - id: end-of-file-fixer
-        exclude: |
-          (?x)^(
-            tests(/\w*)*/functional/m/missing/missing_final_newline.py|
-            tests/functional/t/trailing_newlines.py|
-            doc/data/messages/t/trailing-newlines/bad.py|
-          )$
+      rev: v5.0.0
+      hooks:
+        # Validate format
+        - id: check-yaml
+        - id: check-toml
+        - id: check-json
+        # Check for common mistakes
+        - id: check-added-large-files
+        - id: check-case-conflict
+        # - id: check-illegal-windows-names # TODO: Enable in next release
+        - id: check-merge-conflict
+        - id: check-executables-have-shebangs
+        - id: check-shebang-scripts-are-executable
+        - id: check-symlinks
+        - id: check-vcs-permalinks
+        - id: destroyed-symlinks
+        - id: detect-private-key
+        - id: mixed-line-ending
+        - id: no-commit-to-branch # protects `main` by default
+        - id: debug-statements
+        - id: trailing-whitespace
+          exclude: tests(/\w*)*/functional/t/trailing_whitespaces.py|tests/pyreverse/data/.*.html|doc/data/messages/t/trailing-whitespace/bad.py
+        - id: end-of-file-fixer
+          exclude: |
+            (?x)^(
+              tests(/\w*)*/functional/m/missing/missing_final_newline.py|
+              tests/functional/t/trailing_newlines.py|
+              doc/data/messages/t/trailing-newlines/bad.py|
+            )$
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
-    rev: 'v0.7.0'
+    rev: v0.7.2
     hooks:
       - id: ruff
-        args: [ "--fix" ]
+        args: ["--fix", "--exit-non-zero-on-fix"]
+      - id: ruff-format
 
-  # https://github.com/python/black#version-control-integration
   - repo: https://github.com/psf/black
-    rev: 24.10.0
+    rev: 24.8.0
     hooks:
       - id: black-jupyter
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.12.1
+    rev: v1.13.0
     hooks:
       - id: mypy
-
-  # Other Linters
-  - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.35.1
-    hooks:
-      - id: yamllint
-        args: ["-d {extends: relaxed, rules: {line-length: {max: 120}}}"]
-        stages: [commit, push]
