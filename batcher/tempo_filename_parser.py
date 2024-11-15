@@ -25,6 +25,7 @@
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
 """Holds the logic for grouping together data files based on their filenames."""
+
 import logging
 import re
 from argparse import ArgumentParser
@@ -79,7 +80,8 @@ def main() -> list[list[str]]:
     """Main CLI entrypoint"""
 
     parser = ArgumentParser(
-        prog="batchee", description="Simple CLI wrapper around the granule batcher module."
+        prog="batchee",
+        description="Simple CLI wrapper around the granule batcher module.",
     )
     parser.add_argument(
         "file_names",
