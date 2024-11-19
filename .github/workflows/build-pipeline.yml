@@ -120,8 +120,8 @@ jobs:
         run: |
           git config --global user.name 'batchee bot'
           git config --global user.email 'batchee@noreply.github.com'
-          git commit -am "/version ${{ env.software_version }}"
-          git push
+          git commit -am "/version ${{ env.software_version }}" --no-verify
+          git push --no-verify
 
       # Builds and pushes the package to the Python Package Index (PyPI)
       - name: Build Python Artifact
