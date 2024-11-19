@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.3.0] - 2024-11-19
+
 ### Changed
 
 - update pre commit: to autoupdate and with gitleaks ([#147](https://github.com/nasa/batchee/pull/147))([**@danielfromearth**](https://github.com/danielfromearth))
