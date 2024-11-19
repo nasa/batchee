@@ -30,7 +30,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Set up Poetry
-        uses: abatilo/actions-poetry@v3.0.0
+        uses: abatilo/actions-poetry@v3.0.1
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
 
@@ -39,7 +39,7 @@ jobs:
 
       - name: Lint
         run: |
-          poetry run ruff batcher
+          poetry run ruff check batcher
 
       - name: Run tests with coverage
         run: |

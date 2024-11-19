@@ -22,7 +22,6 @@ class TestBatching:
 
         # test with both paged catalogs and un-paged catalogs
         for in_catalog_name in ["catalog.json", "catalog0.json"]:
-
             in_catalog_path = self.__harmony_path.joinpath("source", in_catalog_name)
 
             test_args = [
