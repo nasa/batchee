@@ -30,7 +30,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Set up Poetry
-        uses: abatilo/actions-poetry@v3.0.1
+        uses: abatilo/actions-poetry@v4.0.0
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
 
@@ -46,7 +46,7 @@ jobs:
           poetry run pytest --cov=batcher --cov-report=xml:build/reports/coverage.xml --cov-report=html:build/reports/coverage.html tests/
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
