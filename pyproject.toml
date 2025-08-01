@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "batchee"
-version = "1.4.0a22"
+version = "1.4.0a23"
 description = "Determine how to group together input files into batches for subsequent concatenation"
 authors = ["Daniel Kaufman <daniel.kaufman@nasa.gov>"]
 readme = "README.md"
