@@ -8,7 +8,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 packages = [
-    { include = "batcher" },
+    { include = "batchee" },
 ]
 
 [tool.poetry.dependencies]
@@ -16,8 +16,8 @@ python = "^3.10"
 harmony-service-lib = ">=2.0.0"
 
 [tool.poetry.scripts]
-batchee_harmony = 'batcher.harmony.cli:main'
-batchee = 'batcher.tempo_filename_parser:main'
+batchee_harmony = 'batchee.harmony.cli:main'
+batchee = 'batchee.tempo_filename_parser:main'
 
 [tool.poetry.group.dev.dependencies]
 coverage = ">=7.8.0"

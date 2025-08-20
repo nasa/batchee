@@ -39,11 +39,11 @@ jobs:
 
       - name: Lint
         run: |
-          poetry run ruff check batcher
+          poetry run ruff check batchee
 
       - name: Run tests with coverage
         run: |
-          poetry run pytest --cov=batcher --cov-report=xml:build/reports/coverage.xml --cov-report=html:build/reports/coverage.html tests/
+          poetry run pytest --cov=batchee --cov-report=xml:build/reports/coverage.xml --cov-report=html:build/reports/coverage.html tests/
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
