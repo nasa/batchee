@@ -30,8 +30,7 @@ import logging
 import re
 from argparse import ArgumentParser
 from datetime import datetime
-
-from dateutil import tz
+from zoneinfo import ZoneInfo
 
 default_logger = logging.getLogger(__name__)
 
@@ -47,7 +46,7 @@ tempo_granule_filename_pattern = re.compile(
     r"(?P<granule_id>G[0-9]{2}).*\.nc"
 )
 
-def get_day_in_us_central(day_in_granule: str, time_in_granule: str, assume_tz=tz.UTC) -> str:
+def get_day_in_us_central(day_in_granule: str, time_in_granule: str, assume_tz=ZoneInfo("UTC")) -> str:
     """
     Convert a datetime to US Central time (US/Central) and return
     a timezone-aware datetime.
@@ -71,7 +70,7 @@ def get_day_in_us_central(day_in_granule: str, time_in_granule: str, assume_tz=t
     dt = datetime.strptime(day_in_granule+time_in_granule, "%Y%m%d%H%M%S")
     dt = dt.replace(tzinfo = assume_tz)
 
-    dt_central = dt.astimezone(tz.gettz('US/Central'))
+    dt_central = dt.astimezone(ZoneInfo("US/Central"))
     return dt_central.strftime("%Y%m%d")
 
 
