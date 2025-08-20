@@ -7,7 +7,7 @@ from urllib.parse import urlsplit
 
 import pytest
 
-import batcher.harmony.cli
+import batchee.harmony.cli
 
 
 @pytest.mark.usefixtures("pass_options")
@@ -25,7 +25,7 @@ class TestBatching:
             in_catalog_path = self.__harmony_path.joinpath("source", in_catalog_name)
 
             test_args = [
-                batcher.harmony.cli.__file__,
+                batchee.harmony.cli.__file__,
                 "--harmony-action",
                 "invoke",
                 "--harmony-input",
@@ -49,7 +49,7 @@ class TestBatching:
             }
 
             with patch.object(sys, "argv", test_args), patch.dict(environ, test_env):
-                batcher.harmony.cli.main()
+                batchee.harmony.cli.main()
 
             # Open the outputs
             out_batch_catalog_path = temp_output_dir.joinpath("batch-catalogs.json")

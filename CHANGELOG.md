@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
 - update grouping algorithm to use day in US Central as the first part of unique grouping identifier ([#177](https://github.com/nasa/batchee/pull/177))([**@ank1m**](https://github.com/ank1m))
+- update package name to match repository name (#171)([**@danielfromearth**](https://github.com/danielfromearth))
 
 ## [1.3.0] - 2024-11-19
 
