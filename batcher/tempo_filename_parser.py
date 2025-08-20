@@ -46,7 +46,10 @@ tempo_granule_filename_pattern = re.compile(
     r"(?P<granule_id>G[0-9]{2}).*\.nc"
 )
 
-def get_day_in_us_central(day_in_granule: str, time_in_granule: str, assume_tz=ZoneInfo("UTC")) -> str:
+
+def get_day_in_us_central(
+    day_in_granule: str, time_in_granule: str, assume_tz=ZoneInfo("UTC")
+) -> str:
     """
     Convert a datetime to US Central time (US/Central) and return
     a timezone-aware datetime.
@@ -67,8 +70,8 @@ def get_day_in_us_central(day_in_granule: str, time_in_granule: str, assume_tz=Z
         The day for datetime converted to US/Central
     """
 
-    dt = datetime.strptime(day_in_granule+time_in_granule, "%Y%m%d%H%M%S")
-    dt = dt.replace(tzinfo = assume_tz)
+    dt = datetime.strptime(day_in_granule + time_in_granule, "%Y%m%d%H%M%S")
+    dt = dt.replace(tzinfo=assume_tz)
 
     dt_central = dt.astimezone(ZoneInfo("US/Central"))
     return dt_central.strftime("%Y%m%d")
@@ -89,7 +92,9 @@ def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) 
         matches = tempo_granule_filename_pattern.match(name)
         if matches:
             match_dict = matches.groupdict()
-            day_in_central= get_day_in_us_central(match_dict["day_in_granule"], match_dict["time_in_granule"])
+            day_in_central = get_day_in_us_central(
+                match_dict["day_in_granule"], match_dict["time_in_granule"]
+            )
             day_and_scans.append((day_in_central, match_dict["daily_scan_id"]))
 
     # Unique day-scans are determined (while keeping the same order). Each will be its own batch.

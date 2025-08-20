@@ -16,10 +16,22 @@ example_filenames = [
     "TEMPO_NO2_L2_V03_20240801T234630Z_S016G03.nc",
 ]
 
+
 def test_timezone_conversion():
-    utcdates = [filename.split('_')[4] for filename in example_filenames]
+    utcdates = [filename.split("_")[4] for filename in example_filenames]
     days_in_central = [get_day_in_us_central(utcdt[0:8], utcdt[9:15]) for utcdt in utcdates]
-    assert days_in_central == ["20240731", "20240731", "20240731", "20240731", "20240731", "20240731", "20240801", "20240801", "20240801"]
+    assert days_in_central == [
+        "20240731",
+        "20240731",
+        "20240731",
+        "20240731",
+        "20240731",
+        "20240731",
+        "20240801",
+        "20240801",
+        "20240801",
+    ]
+
 
 def test_grouping():
     results = get_batch_indices(example_filenames)
