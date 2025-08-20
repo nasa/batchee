@@ -29,6 +29,8 @@
 import logging
 import re
 from argparse import ArgumentParser
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 default_logger = logging.getLogger(__name__)
 
@@ -43,6 +45,36 @@ tempo_granule_filename_pattern = re.compile(
     r"(?P<daily_scan_id>S[0-9]{3})"
     r"(?P<granule_id>G[0-9]{2}).*\.nc"
 )
+
+
+def get_day_in_us_central(
+    day_in_granule: str, time_in_granule: str, assume_tz=ZoneInfo("UTC")
+) -> str:
+    """
+    Convert a datetime to US Central time (US/Central) and return
+    a timezone-aware datetime.
+
+    Parameters
+    ----------
+    day_in_granule: str
+        The day from granule filename
+    time_in_granule: str
+        The time from granule filename
+    assume_tz : timezone, optional (default: UTC)
+        this is the timezone in which `day_in_granule` and `time_in_granule`
+        should be interpreted before converting to Central.
+
+    Returns
+    -------
+    str
+        The day for datetime converted to US/Central
+    """
+
+    dt = datetime.strptime(day_in_granule + time_in_granule, "%Y%m%d%H%M%S")
+    dt = dt.replace(tzinfo=assume_tz)
+
+    dt_central = dt.astimezone(ZoneInfo("America/Chicago"))
+    return dt_central.strftime("%Y%m%d")
 
 
 def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) -> list[int]:
@@ -60,7 +92,10 @@ def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) 
         matches = tempo_granule_filename_pattern.match(name)
         if matches:
             match_dict = matches.groupdict()
-            day_and_scans.append((match_dict["day_in_granule"], match_dict["daily_scan_id"]))
+            day_in_central = get_day_in_us_central(
+                match_dict["day_in_granule"], match_dict["time_in_granule"]
+            )
+            day_and_scans.append((day_in_central, match_dict["daily_scan_id"]))
 
     # Unique day-scans are determined (while keeping the same order). Each will be its own batch.
     unique_day_scans: list[tuple[str, str]] = sorted(set(day_and_scans), key=day_and_scans.index)
@@ -81,7 +116,7 @@ def main() -> list[list[str]]:
 
     parser = ArgumentParser(
         prog="batchee",
-        description="Simple CLI wrapper around the granule batcher module.",
+        description="Simple CLI wrapper around the granule batchee module.",
     )
     parser.add_argument(
         "file_names",

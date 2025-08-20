@@ -5,16 +5,16 @@ ci:
   autofix_prs: false # Comment "pre-commit.ci autofix" on a PR to trigger
 
 default_language_version:
-  python: python3.10
+  python: python3.12
 
 repos:
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.21.2
+    rev: v8.28.0
     hooks:
       - id: gitleaks
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       # Validate format
       - id: check-yaml
@@ -38,19 +38,13 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.7.3
+    rev: v0.12.9
     hooks:
       - id: ruff
         args: ["--fix", "--exit-non-zero-on-fix"]
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.13.0
+    rev: v1.17.1
     hooks:
       - id: mypy
-
-# TODO: Reconsider using the alexjs hook when there is a way to ignore particular warnings and/or files.
-#  - repo: "https://github.com/mfisher87/alexjs-pre-commit-mirror"
-#    rev: "v11.0.1"  # Use the sha / tag you prefer
-#    hooks:
-#      - id: "alex"
