@@ -32,17 +32,17 @@ from harmony_service_lib.util import bbox_to_geometry
 from pystac import Item
 from pystac.item import Asset
 
-from batcher.harmony.util import (
+from batchee.harmony.util import (
     _get_item_url,
     _get_netcdf_urls,
     _get_output_date_range,
 )
-from batcher.tempo_filename_parser import get_batch_indices
+from batchee.tempo_filename_parser import get_batch_indices
 
 
 class ConcatBatching(BaseHarmonyAdapter):
     """
-    A harmony-service-lib wrapper around the concatenate-batcher module.
+    A harmony-service-lib wrapper around the concatenate-batchee module.
     This wrapper does not support Harmony calls that do not have STAC catalogs
     as support for this behavior is being depreciated in harmony-service-lib
     """
