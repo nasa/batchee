@@ -8,8 +8,8 @@
     <a href="https://www.repostatus.org/#active" target="_blank">
         <img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed">
     </a>
-    <a href="http://mypy-lang.org/" target="_blank">
-        <img src="http://www.mypy-lang.org/static/mypy_badge.svg" alt="Mypy checked">
+    <a href="https://mypy-lang.org/" target="_blank">
+        <img src="https://www.mypy-lang.org/static/mypy_badge.svg" alt="Mypy checked">
     </a>
     <a href="https://pypi.org/project/batchee/" target="_blank">
         <img src="https://img.shields.io/pypi/pyversions/batchee.svg" alt="Python Versions">
