@@ -60,9 +60,9 @@ def get_day_in_us_central(
         The day from granule filename
     time_in_granule: str
         The time from granule filename
-    assume_tz : timezon, optional (default: UTC)
-        this is the timezone in which `dt` should be interpreted
-        before converting to Central.
+    assume_tz : timezone, optional (default: UTC)
+        this is the timezone in which `day_in_granule` and `time_in_granule`
+        should be interpreted before converting to Central.
 
     Returns
     -------
@@ -73,7 +73,7 @@ def get_day_in_us_central(
     dt = datetime.strptime(day_in_granule + time_in_granule, "%Y%m%d%H%M%S")
     dt = dt.replace(tzinfo=assume_tz)
 
-    dt_central = dt.astimezone(ZoneInfo("US/Central"))
+    dt_central = dt.astimezone(ZoneInfo("America/Chicago"))
     return dt_central.strftime("%Y%m%d")
 
 
