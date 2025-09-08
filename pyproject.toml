@@ -28,7 +28,7 @@ batchee_harmony = 'batchee.harmony.cli:main'
 batchee = 'batchee.tempo_filename_parser:main'
 
 [tool.poetry]
-version = "1.5.1a3"
+version = "1.6.0a0"
 packages = [
     { include = "batchee" },
 ]
