@@ -6,7 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- update regex for filename pattern to recognize optional NRT label in TEMPO NRT collections ([#187](https://github.com/nasa/batchee/pull/187))([**@ank1m**](https://github.com/ank1m))
+
+## [1.4.0] - 2025-08-20
+
+### Changed
+
 - update grouping algorithm to use day in US Central as the first part of unique grouping identifier ([#177](https://github.com/nasa/batchee/pull/177))([**@ank1m**](https://github.com/ank1m))
+- update package name to match repository name ([#171](https://github.com/nasa/batchee/pull/171))([**@danielfromearth**](https://github.com/danielfromearth))
+- update the default python version from 3.10 to 3.12 ([#180](https://github.com/nasa/batchee/pull/180))([**@danielfromearth**](https://github.com/danielfromearth))
 
 ## [1.3.0] - 2024-11-19
 
