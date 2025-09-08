@@ -16,6 +16,18 @@ example_filenames = [
     "TEMPO_NO2_L2_V03_20240801T234630Z_S016G03.nc",
 ]
 
+example_nrt_filenames = [
+    "TEMPO_NO2_L2_NRT_V02_20250711T183227Z_S010G04.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250711T183904Z_S010G05.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250711T184541Z_S010G06.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250711T185856Z_S010G08.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250712T000606Z_S016G03.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250712T001927Z_S016G05.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250712T161248Z_S008G01.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250712T162608Z_S008G03.nc",
+    "TEMPO_NO2_L2_NRT_V02_20250712T170552Z_S008G09.nc",
+]
+
 
 def test_timezone_conversion():
     utcdates = [filename.split("_")[4] for filename in example_filenames]
@@ -37,6 +49,12 @@ def test_grouping():
     results = get_batch_indices(example_filenames)
 
     assert results == [0, 0, 0, 1, 1, 1, 2, 2, 2]
+
+
+def test_nrt_grouping():
+    results = get_batch_indices(example_nrt_filenames)
+
+    assert results == [0, 0, 0, 0, 1, 1, 2, 2, 2]
 
 
 def test_main_cli():
