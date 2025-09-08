@@ -39,6 +39,7 @@ tempo_granule_filename_pattern = re.compile(
     r"(?P<product_type>[1-9A-Z]+)"
     r"(?P<proxy>(?:-PROXY)*)_"
     r"(?P<processing_level>L[0-9])_"
+    r"(?P<nrt>NRT_)?"
     r"(?P<version_id>V[0-9]+)_"
     r"(?P<day_in_granule>[0-9]{8})T"
     r"(?P<time_in_granule>[0-9]{6})Z_"
