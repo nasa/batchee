@@ -117,7 +117,7 @@ def main() -> list[list[str]]:
 
     parser = ArgumentParser(
         prog="batchee",
-        description="Simple CLI wrapper around the granule batcher module.",
+        description="Simple CLI wrapper around the granule batchee module.",
     )
     parser.add_argument(
         "file_names",
