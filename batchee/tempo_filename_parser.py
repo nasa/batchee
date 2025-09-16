@@ -47,9 +47,11 @@ tempo_granule_filename_pattern = re.compile(
     r"(?P<granule_id>G[0-9]{2}).*\.nc"
 )
 
+DEFAULT_TIMEZONE = ZoneInfo("UTC")
+
 
 def get_day_in_us_central(
-    day_in_granule: str, time_in_granule: str, assume_tz=ZoneInfo("UTC")
+    day_in_granule: str, time_in_granule: str, assume_tz=DEFAULT_TIMEZONE
 ) -> str:
     """
     Convert a datetime to US Central time (US/Central) and return
@@ -144,7 +146,7 @@ def main() -> list[list[str]]:
 
     # --- Construct a STAC object based on the batch indices ---
     grouped: dict[int, list[str]] = {}
-    for k, v in zip(batch_indices, input_filenames):
+    for k, v in zip(batch_indices, input_filenames, strict=False):
         grouped.setdefault(k, []).append(v)
     grouped_names: list[list[str]] = [grouped[k] for k in unique_category_indices]
 

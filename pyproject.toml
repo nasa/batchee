@@ -9,36 +9,44 @@ dynamic = [
     "classifiers"
 ]
 description = "Determine how to group together input files into batches for subsequent concatenation"
-license = "Apache-2.0"
+license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.12,<4"
 authors = [
     { name = "Daniel Kaufman", email = "daniel.kaufman@nasa.gov" }
 ]
 dependencies = [
-    "harmony-service-lib (>=2.0.0)",
+    "harmony-service-lib>=2.0.0",
+]
+keywords = ["nasa", "earthdata", "batch"]
+
+[project.optional-dependencies]
+dev = [
+    "coverage>=7.8.0",
+    "ruff>=0.11.8",
+    "pytest>=8.3.5",
+    "mypy>=1.15.0",
+    "pytest-cov>=6.1.1",
 ]
 
 [project.urls]
 Repository = "https://github.com/nasa/batchee"
 Changelog = "https://github.com/nasa/batchee/blob/main/CHANGELOG.md"
+"Bug Tracker" = "https://github.com/nasa/batchee/issues"
 
 [project.scripts]
 batchee_harmony = 'batchee.harmony.cli:main'
 batchee = 'batchee.tempo_filename_parser:main'
 
 [tool.poetry]
-version = "1.5.1"
+version = "1.5.2rc2"
 packages = [
     { include = "batchee" },
 ]
 
-[tool.poetry.group.dev.dependencies]
-coverage = ">=7.8.0"
-ruff = ">=0.11.8"
-pytest = ">=8.3.5"
-mypy = ">=1.15.0"
-pytest-cov = ">=6.1.1"
+[tool.mypy]
+python_version = "3.12"
+warn_unused_configs = true
 
 [[tool.mypy.overrides]]
 module = [
@@ -59,18 +67,21 @@ line-length = 100
 target-version = "py312"
 
 [tool.ruff.lint]
-# E402: module level import not at top of file
-# E501: line too long - let black worry about that
-# E731: do not assign a lambda expression, use a def
 ignore = [
-  "E402",
-  "E501",
-  "E731",
+    "E402",  # module level import not at top of file
+    "E501",  # line too long - let ruff format handle it
+    "E731",  # do not assign a lambda expression, use a def
 ]
 select = [
-  "F", # Pyflakes
-  "E", # Pycodestyle
-  "W",
-  "I", # isort
-  "UP", # Pyupgrade
+  "F",   # Pyflakes
+  "E",   # Pycodestyle errors
+  "W",   # Pycodestyle warnings
+  "I",   # isort
+  "UP",  # Pyupgrade
+  "B",   # Bugbear (catches common bugs)
+  "C4",  # Comprehensions
+  "SIM", # Simplifications
 ]
+
+[tool.ruff.lint.isort]
+known-first-party = ["batchee"]
