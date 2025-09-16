@@ -101,7 +101,7 @@ class ConcatBatching(BaseHarmonyAdapter):
 
             # --- Construct a dictionary with a separate key for each batch ---
             grouped: dict[int, list[Item]] = {}
-            for k, v in zip(batch_indices, items):
+            for k, v in zip(batch_indices, items, strict=False):
                 grouped.setdefault(k, []).append(v)
 
             # --- Construct a list of STAC Catalogs (which represent each TEMPO scan),
@@ -115,7 +115,7 @@ class ConcatBatching(BaseHarmonyAdapter):
                 batch_catalog.clear_children()
                 batch_catalog.clear_items()
 
-                for idx, item in enumerate(batch_items):
+                for _, item in enumerate(batch_items):
                     # Construct a new pystac.Item for each granule in the batch
                     output_item = Item(
                         str(uuid4()),
