@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Common Changelog](https://common-changelog.org/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.2] - 2025-09-16
+
+### Fixed
+
+- A "patch" release to fix conflict from auto-updated versioning during 1.5.0 release, and update config. ([#191](https://github.com/nasa/batchee/pull/191))([**@danielfromearth**](https://github.com/danielfromearth))
+
 ## [1.5.0] - 2025-09-16
 
 ### Changed
