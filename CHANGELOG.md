@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Implemented new streamlined release workflow. ([#213](https://github.com/nasa/batchee/issues/213))([**@ank1m**](https://github.com/ank1m))
+
 ### Changed
 
 - Switched dependency management and packaging from Poetry to uv for faster installs and simplified workflow. ([#182](https://github.com/nasa/batchee/issues/182))([**@ank1m**](https://github.com/ank1m))
