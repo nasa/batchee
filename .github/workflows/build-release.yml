@@ -73,4 +73,3 @@ jobs:
             --title "Release ${current_tag}" \
             --generate-notes \
             --draft
-

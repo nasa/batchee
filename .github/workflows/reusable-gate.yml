@@ -132,7 +132,7 @@ jobs:
       NEXT_TAG: >-
         ${{ needs.validate_release.outputs.next_tag ||
           needs.validate_candidate.outputs.next_tag }}
-   
+
     steps:
       - name: Retrieve repository
         uses: actions/checkout@v6
