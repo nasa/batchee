@@ -5,10 +5,9 @@
 
 # Runs linting and unit tests on push, and reports
 # code coverage to Codecov.
-name: Run tests and linting
+name: Reusable tests and linting workflow
 
 on:
-  push:
   workflow_call:
     secrets:
       codecov_token:
@@ -21,9 +20,6 @@ env:
 jobs:
   run_tests:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
 
     steps:
       - name: Retrieve repository

@@ -1,0 +1,17 @@
+name: Run tests and linting on push
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - 'release/*'
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  tests:
+    uses: ./.github/workflows/reusable-tests.yml
+    secrets:
+      codecov_token: ${{ secrets.CODECOV_TOKEN }}

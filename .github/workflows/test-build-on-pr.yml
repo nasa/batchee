@@ -1,0 +1,16 @@
+name: Test Docker build on PR
+
+on:
+  pull_request:
+    paths:
+      - 'Dockerfile'
+      - 'pyproject.toml'
+      - 'uv.lock'
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  docker:
+    uses: ./.github/workflows/reusable-docker.yml
