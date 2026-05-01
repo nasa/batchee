@@ -2,6 +2,9 @@ name: Test Docker build on PR
 
 on:
   pull_request:
+    # Source files (batchee/**) are intentionally excluded here;
+    # unit tests in test-on-pr.yml are expected to catch source-level failures.
+    # This workflow targets build-infrastructure changes only.
     paths:
       - 'Dockerfile'
       - 'pyproject.toml'
