@@ -36,7 +36,7 @@ from batchee.harmony.util import (
     _get_item_url,
     _get_netcdf_urls,
     _get_output_date_range,
-    _group_batch_indices
+    _group_batch_indices,
 )
 from batchee.tempo_filename_parser import get_batch_indices
 

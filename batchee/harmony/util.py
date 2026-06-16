@@ -27,6 +27,7 @@
 """Misc utility functions"""
 
 from datetime import datetime
+from typing import Any
 
 from pystac import Asset, Item
 
@@ -130,13 +131,13 @@ def _get_item_date_range(item: Item) -> tuple[datetime, datetime]:
 
     return start_datetime, end_datetime
 
-def _group_batch_indices(batch_indices:list, items:list)-> dict[int, list[str]]:
-    """A helper funtion that groups batches and constructs a dictionary 
+
+def _group_batch_indices(batch_indices: list, items: list) -> dict[int, list]:
+    """A helper funtion that groups batches and constructs a dictionary
     with a separate key for each batch
     """
-    grouped: dict[int, list[str]] = {}
+    grouped: dict[int, Any] = {}
     for k, v in zip(batch_indices, items, strict=False):
         grouped.setdefault(k, []).append(v)
 
     return grouped
-

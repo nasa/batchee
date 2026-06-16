@@ -32,7 +32,7 @@ from argparse import ArgumentParser
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from batchee.harmony.util import  _group_batch_indices
+from batchee.harmony.util import _group_batch_indices
 
 default_logger = logging.getLogger(__name__)
 
