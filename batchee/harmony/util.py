@@ -129,3 +129,13 @@ def _get_item_date_range(item: Item) -> tuple[datetime, datetime]:
         end_datetime = item.datetime
 
     return start_datetime, end_datetime
+
+def _group_batch_indices(batch_indices:list, items:list)-> dict[str, str]:
+    """A helper funtion that groups batches and constructs a dictionary 
+    with a separate key for each batch
+    """
+    grouped: dict[int, list[str]] = {}
+    for k, v in zip(batch_indices, items, strict=False):
+        grouped.setdefault(k, []).append(v)
+
+    return grouped
