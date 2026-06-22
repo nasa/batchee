@@ -32,6 +32,8 @@ from argparse import ArgumentParser
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from batchee.harmony.util import _group_batch_indices
+
 default_logger = logging.getLogger(__name__)
 
 tempo_granule_filename_pattern = re.compile(
@@ -144,11 +146,9 @@ def main() -> list[list[str]]:
     unique_category_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
     logging.info(f"batch_indices = {batch_indices}")
 
-    # --- Construct a STAC object based on the batch indices ---
-    grouped: dict[int, list[str]] = {}
-    for k, v in zip(batch_indices, input_filenames, strict=False):
-        grouped.setdefault(k, []).append(v)
-    grouped_names: list[list[str]] = [grouped[k] for k in unique_category_indices]
+    # --- Construct a dictionary with a separate key for each batch ---
+    grouped_batches = _group_batch_indices(batch_indices, input_filenames)
+    grouped_names: list[list[str]] = [grouped_batches[k] for k in unique_category_indices]
 
     return grouped_names
 
