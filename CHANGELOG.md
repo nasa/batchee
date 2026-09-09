@@ -6,10 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Added a GitHub Actions workflow to build and publish releases to PyPI. ([#225](https://github.com/nasa/batchee/pull/225))([**@ank1m**](https://github.com/ank1m))
+
 ### Changed
 
 - Refactored grouping logic into separate function for reuse ([#215](https://github.com/nasa/batchee/issues/215)) ([**kecunning**](https://github.com/kecunning))
-
 - Implemented new streamlined release workflow. ([#213](https://github.com/nasa/batchee/issues/213))([**@ank1m**](https://github.com/ank1m))
 - Switched dependency management and packaging from Poetry to uv for faster installs and simplified workflow. ([#182](https://github.com/nasa/batchee/issues/182))([**@ank1m**](https://github.com/ank1m))
 
