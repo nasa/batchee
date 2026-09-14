@@ -1,19 +1,17 @@
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 [project]
 name = "batchee"
-dynamic = [
-    "version",
-    "classifiers"
-]
+dynamic = ["version"]
 description = "Determine how to group together input files into batches for subsequent concatenation"
 license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.12,<4"
 authors = [
-    { name = "Daniel Kaufman", email = "daniel.kaufman@nasa.gov" }
+    { name = "Daniel Kaufman", email = "daniel.kaufman@nasa.gov" },
+    { name = "Andrey Kim", email = "andrey.kim@nasa.gov" }
 ]
 dependencies = [
     "harmony-service-lib>=2.0.0",
@@ -29,6 +27,13 @@ dev = [
     "pytest-cov>=6.1.1",
 ]
 
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+# This tells hatch-vcs to use an env var if git metadata is unavailable
+version_scheme = "no-guess-dev"
+
 [project.urls]
 Repository = "https://github.com/nasa/batchee"
 Changelog = "https://github.com/nasa/batchee/blob/main/CHANGELOG.md"
@@ -37,12 +42,6 @@ Changelog = "https://github.com/nasa/batchee/blob/main/CHANGELOG.md"
 [project.scripts]
 batchee_harmony = 'batchee.harmony.cli:main'
 batchee = 'batchee.tempo_filename_parser:main'
-
-[tool.poetry]
-version = "1.5.2"
-packages = [
-    { include = "batchee" },
-]
 
 [tool.mypy]
 python_version = "3.12"

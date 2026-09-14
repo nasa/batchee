@@ -3,7 +3,9 @@
 #   be called by the workflow that runs tests against new PRs and as
 #   a first step in the workflow that publishes new Docker images.
 
-name: A reusable workflow to build and run the unit test suite
+# Runs linting and unit tests on push, and reports
+# code coverage to Codecov.
+name: Reusable tests and linting workflow
 
 on:
   workflow_call:
@@ -13,7 +15,6 @@ on:
   workflow_dispatch:
 
 env:
-  POETRY_VERSION: "2.1.3"
   PYTHON_VERSION: "3.12"
 
 jobs:
@@ -22,31 +23,26 @@ jobs:
 
     steps:
       - name: Retrieve repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Set up Poetry
-        uses: abatilo/actions-poetry@v4.0.0
-        with:
-          poetry-version: ${{ env.POETRY_VERSION }}
+      - name: Install dependencies
+        run: uv sync --extra dev --frozen
 
-      - name: Install package
-        run: poetry install --extras dev
-
-      - name: Lint
+      - name: Run Linting
         run: |
-          poetry run ruff check batchee
+          uv run ruff check batchee
 
       - name: Run tests with coverage
         run: |
-          poetry run pytest --cov=batchee --cov-report=xml:build/reports/coverage.xml --cov-report=html:build/reports/coverage.html tests/
+          uv run pytest --cov=batchee --cov-report=xml:build/reports/coverage.xml tests/
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true

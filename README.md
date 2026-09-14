@@ -65,11 +65,11 @@ git clone <Repository URL>
 cd batchee
 ```
 
-**(Option A) using poetry (Recommended for development):**
+**(Option A) using uv (Recommended for development):**
 
 ```shell
-# Install poetry: https://python-poetry.org/docs/
-poetry install
+# Install uv: https://docs.astral.sh/uv/getting-started/installation/
+uv sync
 ```
 
 **(Option B) using pip:**
@@ -86,9 +86,9 @@ pip install .
 batchee [file_names ...]
 ```
 
-### With Poetry (if installed via poetry)
+### With uv (if installed via uv)
 ```shell
-poetry run batchee [file_names ...]
+uv run batchee [file_names ...]
 ```
 
 ### Options

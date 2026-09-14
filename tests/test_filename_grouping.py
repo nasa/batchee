@@ -2,7 +2,11 @@ import sys
 from unittest.mock import patch
 
 import batchee.tempo_filename_parser
-from batchee.tempo_filename_parser import get_batch_indices, get_day_in_us_central
+from batchee.tempo_filename_parser import (
+    _group_batch_indices,
+    get_batch_indices,
+    get_day_in_us_central,
+)
 
 example_filenames = [
     "TEMPO_NO2_L2_V03_20240731T235252Z_S016G04.nc",
@@ -27,6 +31,14 @@ example_nrt_filenames = [
     "TEMPO_NO2_L2_NRT_V02_20250712T162608Z_S008G03.nc",
     "TEMPO_NO2_L2_NRT_V02_20250712T170552Z_S008G09.nc",
 ]
+
+example_grouping = {
+    0: [
+        "TEMPO_NO2_L2_V04_20230827T002226Z_S011G07.nc",
+        "TEMPO_NO2_L2_V04_20230827T002839Z_S011G08.nc",
+    ],
+    1: ["TEMPO_NO2_L2_V04_20230831T200444Z_S012G07.nc"],
+}
 
 
 def test_timezone_conversion():
@@ -65,3 +77,25 @@ def test_main_cli():
         grouped_names = batchee.tempo_filename_parser.main()
 
     assert grouped_names == [example_filenames[0:3], example_filenames[3:6], example_filenames[6:9]]
+
+
+def test_empty_list():
+    results = get_batch_indices([])
+    assert results == []
+
+
+def test_invalid_filenames():
+    invalid_filenames = ["invalid.nc", "TEMPO_NO2_L2_V03_20240731.nc", "random_file.txt"]
+    results = get_batch_indices(invalid_filenames)
+    assert results == []
+
+
+def test_file_grouping():
+    filenames = [
+        "TEMPO_NO2_L2_V04_20230827T002226Z_S011G07.nc",
+        "TEMPO_NO2_L2_V04_20230827T002839Z_S011G08.nc",
+        "TEMPO_NO2_L2_V04_20230831T200444Z_S012G07.nc",
+    ]
+    batch_indices = get_batch_indices(filenames)
+    grouped_batches = _group_batch_indices(batch_indices, filenames)
+    assert grouped_batches == example_grouping

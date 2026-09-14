@@ -36,6 +36,7 @@ from batchee.harmony.util import (
     _get_item_url,
     _get_netcdf_urls,
     _get_output_date_range,
+    _group_batch_indices,
 )
 from batchee.tempo_filename_parser import get_batch_indices
 
@@ -100,14 +101,12 @@ class ConcatBatching(BaseHarmonyAdapter):
             self.logger.info(f"batch_indices==={batch_indices}.")
 
             # --- Construct a dictionary with a separate key for each batch ---
-            grouped: dict[int, list[Item]] = {}
-            for k, v in zip(batch_indices, items, strict=False):
-                grouped.setdefault(k, []).append(v)
+            grouped_batches = _group_batch_indices(batch_indices, items)
 
             # --- Construct a list of STAC Catalogs (which represent each TEMPO scan),
             #   and each Catalog holds multiple Items (which represent each granule).
             catalogs = []
-            for batch_id, batch_items in grouped.items():
+            for batch_id, batch_items in grouped_batches.items():
                 self.logger.info(f"constructing new pystac.Catalog for batch_id==={batch_id}.")
                 # Initialize a new, empty Catalog
                 batch_catalog = catalog.clone()

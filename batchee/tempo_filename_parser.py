@@ -32,6 +32,8 @@ from argparse import ArgumentParser
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from batchee.harmony.util import _group_batch_indices
+
 default_logger = logging.getLogger(__name__)
 
 tempo_granule_filename_pattern = re.compile(
@@ -87,6 +89,7 @@ def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) 
     list[int]
         batch index for each filename in the original list, e.g. [0, 0, 0, 1, 1, 1, ...]
     """
+
     logger.info(f"get_batch_indices() starting --- with {len(filenames)} filenames")
 
     # Make a new list with days and scans, e.g. [('20130701', 'S009'), ('20130701', 'S009'), ...]
@@ -102,7 +105,6 @@ def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) 
 
     # Unique day-scans are determined (while keeping the same order). Each will be its own batch.
     unique_day_scans: list[tuple[str, str]] = sorted(set(day_and_scans), key=day_and_scans.index)
-
     logger.info(f"unique_day_scans==={unique_day_scans}.")
 
     # Map each day/scan to an integer
@@ -144,11 +146,9 @@ def main() -> list[list[str]]:
     unique_category_indices: list[int] = sorted(set(batch_indices), key=batch_indices.index)
     logging.info(f"batch_indices = {batch_indices}")
 
-    # --- Construct a STAC object based on the batch indices ---
-    grouped: dict[int, list[str]] = {}
-    for k, v in zip(batch_indices, input_filenames, strict=False):
-        grouped.setdefault(k, []).append(v)
-    grouped_names: list[list[str]] = [grouped[k] for k in unique_category_indices]
+    # --- Construct a dictionary with a separate key for each batch ---
+    grouped_batches = _group_batch_indices(batch_indices, input_filenames)
+    grouped_names: list[list[str]] = [grouped_batches[k] for k in unique_category_indices]
 
     return grouped_names
 
