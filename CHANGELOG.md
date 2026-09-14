@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.5.3] - 2026-09-14
+
 ### Added
 
 - Added a GitHub Actions workflow to build and publish releases to PyPI. ([#225](https://github.com/nasa/batchee/pull/225))([**@ank1m**](https://github.com/ank1m))
