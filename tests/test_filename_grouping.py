@@ -1,6 +1,8 @@
 import sys
 from unittest.mock import patch
 
+import pytest
+
 import batchee.tempo_filename_parser
 from batchee.tempo_filename_parser import (
     _group_batch_indices,
@@ -99,3 +101,34 @@ def test_file_grouping():
     batch_indices = get_batch_indices(filenames)
     grouped_batches = _group_batch_indices(batch_indices, filenames)
     assert grouped_batches == example_grouping
+
+
+@pytest.mark.parametrize(
+    ("indices", "items"),
+    [([], ["a"]), ([0], []), ([0], ["a", "b"]), ([0, 1], ["a"])],
+)
+def test_grouping_rejects_different_input_lengths(indices, items):
+    with pytest.raises(ValueError):
+        _group_batch_indices(indices, items)
+
+
+@pytest.mark.parametrize("invalid_position", [0, 1, 2])
+def test_cli_rejects_mixed_unrecognized_filenames(invalid_position):
+    filenames = [example_filenames[0], example_filenames[6]]
+    filenames.insert(invalid_position, "unrecognized.nc")
+    with patch.object(sys, "argv", ["batchee", *filenames]), pytest.raises(ValueError):
+        batchee.tempo_filename_parser.main()
+
+
+def test_cli_rejects_all_unrecognized_filenames():
+    with patch.object(sys, "argv", ["batchee", "unrecognized.nc"]), pytest.raises(ValueError):
+        batchee.tempo_filename_parser.main()
+
+
+def test_equal_length_groups_keep_order_and_object_identity():
+    items = [object() for _ in range(4)]
+    grouped = _group_batch_indices([4, 2, 4, 2], items)
+    assert list(grouped) == [4, 2]
+    assert grouped[4] == [items[0], items[2]]
+    assert grouped[2] == [items[1], items[3]]
+    assert _group_batch_indices([], []) == {}

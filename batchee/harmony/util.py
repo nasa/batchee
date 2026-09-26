@@ -133,11 +133,13 @@ def _get_item_date_range(item: Item) -> tuple[datetime, datetime]:
 
 
 def _group_batch_indices(batch_indices: list, items: list) -> dict[int, list]:
-    """A helper funtion that groups batches and constructs a dictionary
-    with a separate key for each batch
+    """Group items under their batch indices.
+
+    Raise ValueError if an item has no batch index or an index has no item.
+    Silently truncating either input can associate granules with wrong batches.
     """
     grouped: dict[int, Any] = {}
-    for k, v in zip(batch_indices, items, strict=False):
+    for k, v in zip(batch_indices, items, strict=True):
         grouped.setdefault(k, []).append(v)
 
     return grouped
