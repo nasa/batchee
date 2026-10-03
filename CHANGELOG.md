@@ -80,3 +80,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add license ([#100](https://github.com/nasa/batchee/pull/100))([**@danielfromearth**](https://github.com/danielfromearth))
 - Add codecov to CI pipeline ([#111](https://github.com/nasa/batchee/pull/111))([**@danielfromearth**](https://github.com/danielfromearth))
 - Add SNYK and PyPI to CI pipeline ([#112](https://github.com/nasa/batchee/pull/111))([**@danielfromearth**](https://github.com/danielfromearth))
+
+[1.5.3]: https://github.com/nasa/batchee/releases/tag/1.5.3
+[1.5.2]: https://github.com/nasa/batchee/releases/tag/1.5.2
+[1.5.0]: https://github.com/nasa/batchee/releases/tag/1.5.0
+[1.4.0]: https://github.com/nasa/batchee/releases/tag/1.4.0
+[1.3.0]: https://github.com/nasa/batchee/releases/tag/1.3.0
+[1.2.0]: https://github.com/nasa/batchee/releases/tag/1.2.0
+[1.1.0]: https://github.com/nasa/batchee/releases/tag/1.1.0
+[1.0.0]: https://github.com/nasa/batchee/releases/tag/1.0.0
