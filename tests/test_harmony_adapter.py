@@ -1,13 +1,17 @@
 import json
 import sys
+from datetime import UTC, datetime
 from os import environ
 from pathlib import Path
 from unittest.mock import patch
 from urllib.parse import urlsplit
 
+import pystac
 import pytest
+from harmony_service_lib.message import Message
 
 import batchee.harmony.cli
+from batchee.harmony.service_adapter import ConcatBatching
 
 
 @pytest.mark.usefixtures("pass_options")
@@ -98,3 +102,39 @@ class TestBatching:
             }
 
             assert batched_files == files_dict
+
+
+@pytest.mark.parametrize("invalid_position", [0, 1, 2])
+def test_adapter_rejects_incomplete_batch_mapping(invalid_position):
+    filenames = [
+        "TEMPO_NO2_L2_V03_20240601T120101Z_S012G01.nc",
+        "TEMPO_NO2_L2_V03_20240601T120202Z_S013G01.nc",
+    ]
+    filenames.insert(invalid_position, "unrecognized.nc")
+    catalog = pystac.Catalog("input", "Input granules")
+    for index, filename in enumerate(filenames):
+        item = pystac.Item(
+            str(index),
+            {"type": "Point", "coordinates": [0, 0]},
+            [0, 0, 0, 0],
+            datetime(2024, 6, 1, tzinfo=UTC),
+            {},
+        )
+        item.add_asset(
+            "data",
+            pystac.Asset(
+                f"https://example.com/{filename}",
+                media_type="application/x-netcdf4",
+                roles=["data"],
+            ),
+        )
+        catalog.add_item(item)
+    original_items = list(catalog.get_items())
+    original_urls = [item.assets["data"].href for item in original_items]
+    adapter = ConcatBatching(Message({"requestId": "test-batch-lengths"}), catalog=catalog)
+
+    with pytest.raises(ValueError):
+        adapter.invoke()
+
+    assert list(catalog.get_items()) == original_items
+    assert [item.assets["data"].href for item in catalog.get_items()] == original_urls
